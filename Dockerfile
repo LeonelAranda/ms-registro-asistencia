@@ -16,7 +16,7 @@ RUN mvn clean package
 
 FROM eclipse-temurin:22-jdk 
 
-COPY --from=buildstage /app/target/ms-gestion-trabajadores-0.0.1.jar /app/ms-registro-asistencia-0.0.1.jar
+COPY --from=buildstage /app/target/ms-registro-asistencia-0.0.1.jar /app/ms-registro-asistencia-0.0.1.jar
 
 COPY Wallet_DbCapstone /app/oracle_wallet
 

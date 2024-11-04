@@ -60,7 +60,7 @@ jobs:
             # Descargar la última versión de la imagen
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/ms-registro-asistencia:latest
             # Parar y eliminar cualquier contenedor previo
-            docker stop ms-registro-asistencia:latest || true && docker rm ms-registro-asistencia:latest || true
+            docker stop ms-registro-asistencia || true && docker rm ms-registro-asistencia || true
             # Iniciar el contenedor
             docker run -d --name ms-registro-asistencia:latest -p 8083:8083 ${{ secrets.DOCKERHUB_USERNAME }}/ms-registro-asistencia:latest
           EOF

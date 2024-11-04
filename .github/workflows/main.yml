@@ -62,5 +62,5 @@ jobs:
             # Parar y eliminar cualquier contenedor previo
             docker stop ms-registro-asistencia || true && docker rm ms-registro-asistencia || true
             # Iniciar el contenedor
-            docker run -d --name ms-registro-asistencia:latest -p 8083:8083 ${{ secrets.DOCKERHUB_USERNAME }}/ms-registro-asistencia:latest
+            docker run -d --name ms-registro-asistencia -p 8083:8083 ${{ secrets.DOCKERHUB_USERNAME }}/ms-registro-asistencia:latest
           EOF

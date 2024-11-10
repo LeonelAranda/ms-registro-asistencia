@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build and Push Docker Image 
 
 on:
   push:
@@ -58,9 +58,9 @@ jobs:
             # Autenticar en DockerHub desde EC2
             echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
             # Descargar la última versión de la imagen
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/ms-registro-asistencia:latest
             # Parar y eliminar cualquier contenedor previo
-            docker stop my-app || true && docker rm my-app || true
+            docker stop ms-registro-asistencia || true && docker rm ms-registro-asistencia || true
             # Iniciar el contenedor
-            docker run -d --name my-app -p 8080:8081 ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
+            docker run -d --name ms-registro-asistencia -p 8083:8083 ${{ secrets.DOCKERHUB_USERNAME }}/ms-registro-asistencia:latest
           EOF

@@ -92,14 +92,14 @@ public class RekognitionService {
 
     public ResponseEntity<String> identifyWorker(MultipartFile file) {
         try {
-            // Compara la imagen con las imágenes de la colección
+            if (file.isEmpty()) {
+                return ResponseEntity.badRequest().body("File cannot be empty");
+            }
 
+            // Crear la solicitud de búsqueda de coincidencia de rostros
             SearchFacesByImageRequest searchFacesByImageRequest = SearchFacesByImageRequest.builder()
                     .collectionId(collectionId)
-                    .image(Image.builder().bytes(SdkBytes.fromByteBuffer(ByteBuffer.wrap(file.getBytes()))).build()) // Convertir
-                                                                                                                     // ByteBuffer
-                                                                                                                     // a
-                                                                                                                     // SdkBytes
+                    .image(Image.builder().bytes(SdkBytes.fromByteBuffer(ByteBuffer.wrap(file.getBytes()))).build())
                     .build();
 
             SearchFacesByImageResponse searchFacesByImageResponse = rekognitionClient
@@ -113,8 +113,12 @@ public class RekognitionService {
                 return ResponseEntity.status(404).body("Worker not identified.");
             }
 
-        } catch (IOException | RekognitionException e) {
-            return ResponseEntity.status(500).body("Failed to identify worker: " + e.getMessage());
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body("Failed to identify worker due to file error: " + e.getMessage());
+        } catch (RekognitionException e) {
+            return ResponseEntity.status(500)
+                    .body("Failed to identify worker in Rekognition: " + e.awsErrorDetails().errorMessage());
         }
     }
+
 }

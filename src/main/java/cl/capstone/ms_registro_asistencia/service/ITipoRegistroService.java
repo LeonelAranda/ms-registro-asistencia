@@ -8,7 +8,7 @@ public interface ITipoRegistroService {
 
     public List<TipoRegistro> getTipoRegistros();
 
-    public void saveTipoRegistro(TipoRegistro tipoRegistro);
+    public TipoRegistro saveTipoRegistro(TipoRegistro tipoRegistro);
 
     public void deleteTipoRegistro(Long id);
 

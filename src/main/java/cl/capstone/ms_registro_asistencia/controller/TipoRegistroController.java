@@ -27,13 +27,28 @@ public class TipoRegistroController {
     ITipoRegistroService tipoRegistroService;
 
     @PostMapping("/tiporegistro/crear")
-    public String saveTipoRegistro(@RequestBody TipoRegistro tipoRegistro) {
+    public ResponseEntity<Response> saveTipoRegistro(@RequestBody TipoRegistro tipoRegistro) {
 
-        // Response response = new Response();
-        // LocalDateTime currentDate = LocalDateTime.now();
+        Response response = new Response();
+        LocalDateTime currentDate = LocalDateTime.now();
 
-        tipoRegistroService.saveTipoRegistro(tipoRegistro);
-        return "Tipo registro creado";
+        TipoRegistro nuevoTipoRegistro = tipoRegistroService.saveTipoRegistro(tipoRegistro);
+
+        if (nuevoTipoRegistro != null) {
+            // Si existe el trabajador, procedemos a eliminarlo
+            response.setCodigoRetorno(0); // Código de éxito
+            response.setGlosaRetorno("Nuevo tipo de registro creado.");
+            response.setResultado(nuevoTipoRegistro);
+            response.setTimestamp(currentDate);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            // Si el trabajador no existe, retornamos un mensaje de error
+            response.setCodigoRetorno(-1); // Código de error
+            response.setGlosaRetorno("No se pudo crear el nuevo tipo de registro.");
+            response.setResultado(null);
+            response.setTimestamp(currentDate);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/tiporegistro/borrar/{id}")

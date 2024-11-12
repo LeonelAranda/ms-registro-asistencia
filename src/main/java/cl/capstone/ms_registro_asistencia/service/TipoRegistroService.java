@@ -22,9 +22,11 @@ public class TipoRegistroService implements ITipoRegistroService {
     }
 
     @Override
-    public void saveTipoRegistro(TipoRegistro tipoRegistro) {
+    public TipoRegistro saveTipoRegistro(TipoRegistro tipoRegistro) {
 
         tipoRegistroRepository.save(tipoRegistro);
+
+        return tipoRegistro;
 
     }
 

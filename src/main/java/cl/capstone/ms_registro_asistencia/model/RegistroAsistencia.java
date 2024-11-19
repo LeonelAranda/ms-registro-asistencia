@@ -26,14 +26,14 @@ public class RegistroAsistencia {
     @Column(name = "ID_REGISTRO", nullable = false)
     private Long idRegistro;
 
-    @Column(name = "ID_TRABAJADOR", nullable = false)
-    private Long idTrabajador;
+    @Column(name = "RUN_TRABAJADOR", nullable = false)
+    private Long runTrabajador;
 
     @Column(name = "FECHA_HORA", nullable = false)
     private LocalDateTime fechaHora;
 
-    @Column(name = "ASISTENCIA", nullable = false)
-    private Boolean asistencia;
+    @Column(name = "ID_FAENA", nullable = false)
+    private Long idFaena;
 
     @ManyToOne
     @JoinColumn(name = "TIPO_REGISTRO", referencedColumnName = "ID_TIPO_REGISTRO")

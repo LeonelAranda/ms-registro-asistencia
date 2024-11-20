@@ -50,4 +50,10 @@ public class RegistroAsistenciaService implements IRegistroAsistenciaService {
 
     }
 
+    @Override
+    public List<RegistroAsistencia> findByIdFaena(int idFaena) {
+
+        return registroAsistenciaRepository.findByIdFaena(idFaena);
+    }
+
 }

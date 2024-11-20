@@ -27,7 +27,7 @@ public class RegistroAsistencia {
     private Long idRegistro;
 
     @Column(name = "RUN_TRABAJADOR", nullable = false)
-    private Long runTrabajador;
+    private String runTrabajador;
 
     @Column(name = "FECHA_HORA", nullable = false)
     private LocalDateTime fechaHora;

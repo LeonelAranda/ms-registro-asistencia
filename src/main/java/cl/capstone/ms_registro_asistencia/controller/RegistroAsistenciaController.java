@@ -131,4 +131,12 @@ public class RegistroAsistenciaController {
 
     }
 
+    @GetMapping("/registroasistencia/traerPorFaena/{idFaena}")
+    public List<RegistroAsistencia> findtrabajadorIdFaena(int idFaena) {
+
+        List<RegistroAsistencia> listaTrabajadores = registroAsistenciaService.findByIdFaena(idFaena);
+        return listaTrabajadores;
+
+    }
+
 }

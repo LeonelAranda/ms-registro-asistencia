@@ -15,4 +15,7 @@ public interface IRegistroAsistenciaService {
     public RegistroAsistencia findRegistroAsistencia(Long id);
 
     public void editRegistroAsistencia(RegistroAsistencia registroAsistencia);
+
+    public List<RegistroAsistencia> findByIdFaena(int idFaena);
+
 }

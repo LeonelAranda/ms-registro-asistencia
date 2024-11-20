@@ -132,10 +132,25 @@ public class RegistroAsistenciaController {
     }
 
     @GetMapping("/registroasistencia/traerPorFaena/{idFaena}")
-    public List<RegistroAsistencia> findtrabajadorIdFaena(int idFaena) {
+    public ResponseEntity<Response> findtrabajadorIdFaena(int idFaena) {
 
         List<RegistroAsistencia> listaTrabajadores = registroAsistenciaService.findByIdFaena(idFaena);
-        return listaTrabajadores;
+        Response response = new Response();
+        LocalDateTime currentDate = LocalDateTime.now();
+
+        if (listaTrabajadores == null || listaTrabajadores.isEmpty()) {
+            response.setCodigoRetorno(-1);
+            response.setGlosaRetorno("Registros no encotrados.");
+            response.setResultado(listaTrabajadores);
+            response.setTimestamp(currentDate);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        } else {
+            response.setCodigoRetorno(0);
+            response.setGlosaRetorno("Registros encontrados.");
+            response.setResultado(listaTrabajadores);
+            response.setTimestamp(currentDate);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
 
     }
 

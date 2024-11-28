@@ -3,10 +3,12 @@ package cl.capstone.ms_registro_asistencia.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import cl.capstone.ms_registro_asistencia.model.TipoMarcaje;
 import cl.capstone.ms_registro_asistencia.repository.ITipoMarcajeRepository;
 
+@Service
 public class TipoMarcajeService implements ITipoMarcajeService {
 
     @Autowired

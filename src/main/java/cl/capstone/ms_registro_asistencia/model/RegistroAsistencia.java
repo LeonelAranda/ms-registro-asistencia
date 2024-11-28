@@ -1,6 +1,7 @@
 package cl.capstone.ms_registro_asistencia.model;
 
-import java.time.LocalDateTime;
+import java.sql.Time;
+import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,8 +30,11 @@ public class RegistroAsistencia {
     @Column(name = "RUN_TRABAJADOR", nullable = false)
     private String runTrabajador;
 
-    @Column(name = "FECHA_HORA", nullable = false)
-    private LocalDateTime fechaHora;
+    @Column(name = "FECHA", nullable = false)
+    private Date fecha;
+
+    @Column(name = "HORA", nullable = false)
+    private Time hora;
 
     @Column(name = "ID_FAENA", nullable = false)
     private Long idFaena;
@@ -38,5 +42,9 @@ public class RegistroAsistencia {
     @ManyToOne
     @JoinColumn(name = "TIPO_REGISTRO", referencedColumnName = "ID_TIPO_REGISTRO")
     private TipoRegistro tipoRegistroJoin;
+
+    @ManyToOne
+    @JoinColumn(name = "TIPO_MARCAJE", referencedColumnName = "ID_TIPO_MARCAJE")
+    private TipoMarcaje tipoMarcaje;
 
 }

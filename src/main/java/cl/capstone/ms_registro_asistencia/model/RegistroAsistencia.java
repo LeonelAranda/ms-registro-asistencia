@@ -1,6 +1,6 @@
 package cl.capstone.ms_registro_asistencia.model;
 
-import java.time.LocalTime;
+import java.sql.Time;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -34,7 +34,7 @@ public class RegistroAsistencia {
     private Date fecha;
 
     @Column(name = "HORA", nullable = false)
-    private LocalTime hora;
+    private Time hora;
 
     @Column(name = "ID_FAENA", nullable = false)
     private Long idFaena;

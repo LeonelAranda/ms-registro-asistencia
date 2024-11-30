@@ -28,27 +28,24 @@ public class RegistroAsistenciaController {
 
     @PostMapping("/registroasistencia/crear")
     public ResponseEntity<Response> saveRegistroAsistencia(@RequestBody RegistroAsistencia registroAsistencia) {
-
         Response response = new Response();
         LocalDateTime currentDate = LocalDateTime.now();
 
-        RegistroAsistencia nuevoRegistroAsistencia = registroAsistenciaService
-                .saveRegistroAsistencias(registroAsistencia);
+        try {
+            RegistroAsistencia nuevoRegistroAsistencia = registroAsistenciaService
+                    .saveRegistroAsistencias(registroAsistencia);
 
-        if (nuevoRegistroAsistencia != null) {
-            // Si existe el trabajador, procedemos a eliminarlo
-            response.setCodigoRetorno(0); // Código de éxito
+            response.setCodigoRetorno(0);
             response.setGlosaRetorno("Registro creado.");
             response.setResultado(nuevoRegistroAsistencia);
             response.setTimestamp(currentDate);
             return new ResponseEntity<>(response, HttpStatus.OK);
-        } else {
-            // Si el trabajador no existe, retornamos un mensaje de error
-            response.setCodigoRetorno(-1); // Código de error
-            response.setGlosaRetorno("No se pudo crear el registro.");
+        } catch (Exception e) {
+            response.setCodigoRetorno(-1);
+            response.setGlosaRetorno("Error al crear el registro: " + e.getMessage());
             response.setResultado(null);
             response.setTimestamp(currentDate);
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

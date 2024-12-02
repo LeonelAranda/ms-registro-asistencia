@@ -2,6 +2,8 @@ package cl.capstone.ms_registro_asistencia.service;
 
 import java.util.List;
 
+import cl.capstone.ms_registro_asistencia.dto.FiltroAsistenciaDTO;
+import cl.capstone.ms_registro_asistencia.dto.RegistroAsistenciaDTO;
 import cl.capstone.ms_registro_asistencia.model.RegistroAsistencia;
 
 public interface IRegistroAsistenciaService {
@@ -17,5 +19,9 @@ public interface IRegistroAsistenciaService {
     public void editRegistroAsistencia(RegistroAsistencia registroAsistencia);
 
     public List<RegistroAsistencia> findByIdFaena(int idFaena);
+
+    public List<RegistroAsistenciaDTO> obtenerRegistrosHistoricos(FiltroAsistenciaDTO filtro);
+
+    public List<RegistroAsistenciaDTO> obtenerRegistrosDiario(FiltroAsistenciaDTO filtro);
 
 }

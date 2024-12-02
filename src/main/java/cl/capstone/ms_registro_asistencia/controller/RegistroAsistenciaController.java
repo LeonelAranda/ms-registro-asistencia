@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import cl.capstone.ms_registro_asistencia.dto.FiltroAsistenciaDTO;
+import cl.capstone.ms_registro_asistencia.dto.RegistroAsistenciaDTO;
 import cl.capstone.ms_registro_asistencia.model.RegistroAsistencia;
 import cl.capstone.ms_registro_asistencia.model.Response;
 import cl.capstone.ms_registro_asistencia.service.IRegistroAsistenciaService;
@@ -149,6 +151,30 @@ public class RegistroAsistenciaController {
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
 
+    }
+
+    @PostMapping("/historico")
+    public ResponseEntity<List<RegistroAsistenciaDTO>> obtenerRegistrosHistoricos(
+            @RequestBody FiltroAsistenciaDTO filtro) {
+        List<RegistroAsistenciaDTO> registros = registroAsistenciaService.obtenerRegistrosHistoricos(filtro);
+
+        if (registros.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // Si no hay registros, devuelve 204
+        }
+
+        return new ResponseEntity<>(registros, HttpStatus.OK); // Devuelve los registros con código 200 OK
+    }
+
+    @PostMapping("/diario")
+    public ResponseEntity<List<RegistroAsistenciaDTO>> obtenerRegistrosDiarios(
+            @RequestBody FiltroAsistenciaDTO filtro) {
+        List<RegistroAsistenciaDTO> registros = registroAsistenciaService.obtenerRegistrosDiario(filtro);
+
+        if (registros.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // Si no hay registros, devuelve 204
+        }
+
+        return new ResponseEntity<>(registros, HttpStatus.OK); // Devuelve los registros con código 200 OK
     }
 
 }

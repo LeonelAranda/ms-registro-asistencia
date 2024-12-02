@@ -5,14 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cl.capstone.ms_registro_asistencia.dto.FiltroAsistenciaDTO;
+import cl.capstone.ms_registro_asistencia.dto.RegistroAsistenciaDTO;
 import cl.capstone.ms_registro_asistencia.model.RegistroAsistencia;
 import cl.capstone.ms_registro_asistencia.repository.IRegistroAsistenciaRepository;
+import cl.capstone.ms_registro_asistencia.repository.RegistroAsistenciaRepository;
 
 @Service
 public class RegistroAsistenciaService implements IRegistroAsistenciaService {
 
     @Autowired
     IRegistroAsistenciaRepository registroAsistenciaRepository;
+
+    @Autowired
+    RegistroAsistenciaRepository registroAsistenciaRepository2;
 
     @Override
     public List<RegistroAsistencia> getRegistroAsistencias() {
@@ -54,6 +60,14 @@ public class RegistroAsistenciaService implements IRegistroAsistenciaService {
     public List<RegistroAsistencia> findByIdFaena(int idFaena) {
 
         return registroAsistenciaRepository.findByIdFaena(idFaena);
+    }
+
+    public List<RegistroAsistenciaDTO> obtenerRegistrosHistoricos(FiltroAsistenciaDTO filtro) {
+        return registroAsistenciaRepository2.obtenerRegistrosHistoricos(filtro);
+    }
+
+    public List<RegistroAsistenciaDTO> obtenerRegistrosDiario(FiltroAsistenciaDTO filtro) {
+        return registroAsistenciaRepository2.obtenerRegistrosDiarios(filtro);
     }
 
 }
